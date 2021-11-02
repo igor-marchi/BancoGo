@@ -1,26 +1,36 @@
 package main
 
 import (
+	"curso-02/clientes"
+	"curso-02/contas"
 	"fmt"
 )
 
 func main() {
-	contaIgor := ContaCorrente{
-		Titular: "Igor",
-		NumAg:   589,
-		NumAcc:  123456,
-		Saldo:   100.00,
+	clienteIgor := clientes.Titular{
+		Nome:      "Igor",
+		CPF:       "123.123.666.88",
+		Profissao: "Developer",
 	}
 
-	contaSilvia := ContaCorrente{
-		Titular: "Silvia",
-		NumAg:   589,
-		NumAcc:  123456,
-		Saldo:   500.00,
+	contaCorrenteDoIgor := contas.ContaCorrente{
+		Titular: clienteIgor,
+		NumAg:   123,
+		NumAcc:  123,
 	}
 
-	fmt.Println(contaIgor.Saldo)
-	status := contaSilvia.transferir(300, &contaIgor)
-	fmt.Println(status)
-	fmt.Println(contaIgor, contaSilvia)
+	contaPoupancaDoIgor := contas.ContaPoupanca{
+		Titular:  clienteIgor,
+		NumAg:    123,
+		NumAcc:   123,
+		Operacao: 12,
+	}
+
+	contaCorrenteDoIgor.Depositar(100)
+	contaPoupancaDoIgor.Depositar(100)
+
+	fmt.Println(contaCorrenteDoIgor)
+	fmt.Println(contaPoupancaDoIgor)
+	fmt.Println(contaCorrenteDoIgor.ObsterSaldo())
+	fmt.Println(contaPoupancaDoIgor.ObsterSaldo())
 }
