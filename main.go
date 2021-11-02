@@ -29,8 +29,19 @@ func main() {
 	contaCorrenteDoIgor.Depositar(100)
 	contaPoupancaDoIgor.Depositar(100)
 
+	PagarBoleto(&contaCorrenteDoIgor, 60)
+	PagarBoleto(&contaPoupancaDoIgor, 60)
+
 	fmt.Println(contaCorrenteDoIgor)
 	fmt.Println(contaPoupancaDoIgor)
 	fmt.Println(contaCorrenteDoIgor.ObsterSaldo())
 	fmt.Println(contaPoupancaDoIgor.ObsterSaldo())
+}
+
+type verificarConta interface {
+	Sacar(valor float64) (string, float64)
+}
+
+func PagarBoleto(conta verificarConta, valorBoleto float64) {
+	conta.Sacar(valorBoleto)
 }
